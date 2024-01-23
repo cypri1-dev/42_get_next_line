@@ -1,0 +1,105 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cyferrei <cyferrei@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/25 09:45:09 by cyferrei          #+#    #+#             */
+/*   Updated: 2023/12/06 15:12:37 by cyferrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line_bonus.h"
+
+char	*ft_strchr(char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!s || s[0] == '\0')
+		return (NULL);
+	if (c == 0)
+		return (s + ft_strlen(s));
+	while (s[i])
+	{
+		if (s[i] == (unsigned char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	return (0);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (!dest && !src)
+		return (dest);
+	while (i < n)
+	{
+		((char *)dest)[i] = ((char *)src)[i];
+		i++;
+	}
+	return ((void *)dest);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	i;
+	size_t	j;
+	char	*new;
+
+	if (!s1)
+		s1 = ft_calloc(1, sizeof(char));
+	if (!s1 || !s2)
+		return (NULL);
+	new = (char *)ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	if (!new)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		new[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+	{
+		new[j] = s2[i];
+		j++;
+		i++;
+	}
+	free((void *)s1);
+	return (new);
+}
+
+void	*ft_calloc(size_t nmeb, size_t size)
+{
+	char	*res;
+	char	*str;
+	size_t	i;
+
+	res = malloc(nmeb * size);
+	if (!res)
+		return (NULL);
+	str = res;
+	i = 0;
+	while (i < nmeb * size)
+	{
+		str[i] = '\0';
+		i++;
+	}
+	return (res);
+}
